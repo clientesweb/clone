@@ -1,5 +1,5 @@
 // API Key de YouTube (reemplázala por la tuya)
-const apiKey = 'YOUR_YOUTUBE_API_KEY';
+const apiKey = 'AIzaSyB4HGg2WVC-Sq3Qyj9T9Z9aBBGbET1oGs0';
 
 // Elementos del DOM
 const searchInput = document.getElementById('search-input');
