@@ -1,20 +1,18 @@
 // API Key de YouTube (reemplázala por la tuya)
 const apiKey = 'AIzaSyB4HGg2WVC-Sq3Qyj9T9Z9aBBGbET1oGs0';
+const channelId = 'UCc4fHgV3zRgjHxYZJkQdxhw'; // Reemplázalo con tu ID de canal
 
 // Elementos del DOM
-const searchInput = document.getElementById('search-input');
-const searchBtn = document.getElementById('search-btn');
 const videoSection = document.getElementById('video-section');
 
-// Buscar videos al hacer clic
-searchBtn.addEventListener('click', () => {
-    const query = searchInput.value;
-    searchVideos(query);
-});
+// Mostrar videos al cargar la página
+window.onload = () => {
+    loadChannelVideos();
+};
 
-// Función para buscar videos usando la API de YouTube
-function searchVideos(query) {
-    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${query}&key=${apiKey}`)
+// Función para cargar videos de un canal específico
+function loadChannelVideos() {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=9&order=date&type=video&key=${apiKey}`)
         .then(response => response.json())
         .then(data => {
             displayVideos(data.items);
