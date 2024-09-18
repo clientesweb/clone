@@ -84,3 +84,58 @@ main {
     font-size: 18px;
     color: #333;
 }
+/* Shorts section */
+#shorts-section {
+    padding: 20px;
+}
+
+#shorts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+}
+
+#shorts-container .short {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#shorts-container .short:hover {
+    transform: scale(1.05);
+}
+
+/* Live section */
+#live-section {
+    margin-top: 40px;
+}
+
+#live-container {
+    display: flex;
+    align-items: center;
+    background-color: #ffebe6;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+#live-container img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+}
+
+#live-container h3 {
+    margin-left: 20px;
+    font-size: 24px;
+}
+
+#live-container button {
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
