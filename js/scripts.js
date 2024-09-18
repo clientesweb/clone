@@ -30,6 +30,54 @@ function displayVideos(videos) {
             <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
             <h3>${video.snippet.title}</h3>
         `;
+        videoDiv.addEventListener('click', () => playVideo(video.id.videoId));
         videoSection.appendChild(videoDiv);
     });
+}
+
+// Reproducir video en la página
+function playVideo(videoId) {
+    const playerSection = document.getElementById('player-section');
+    playerSection.innerHTML = `
+        <iframe width="100%" height="500" src="https://www.youtube.com/embed/${videoId}" 
+        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen></iframe>
+    `;
+}
+// Cargar Shorts
+function loadShorts() {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&type=video&videoDuration=short&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            displayShorts(data.items);
+        });
+}
+
+function displayShorts(shorts) {
+    const shortsContainer = document.getElementById('shorts-container');
+    shorts.forEach(short => {
+        const shortDiv = document.createElement('div');
+        shortDiv.classList.add('short');
+        shortDiv.innerHTML = `<img src="${short.snippet.thumbnails.medium.url}" alt="${short.snippet.title}">`;
+        shortDiv.addEventListener('click', () => playVideo(short.id.videoId));
+        shortsContainer.appendChild(shortDiv);
+    });
+}
+
+// Cargar En Vivo
+function loadLiveStream() {
+    fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&eventType=live&type=video&key=${apiKey}`)
+        .then(response => response.json())
+        .then(data => {
+            displayLiveStream(data.items[0]); // Mostramos solo el primero si hay más en vivo
+        });
+}
+
+function displayLiveStream(liveVideo) {
+    const liveContainer = document.getElementById('live-container');
+    liveContainer.innerHTML = `
+        <img src="${liveVideo.snippet.thumbnails.medium.url}" alt="${liveVideo.snippet.title}">
+        <h3>${liveVideo.snippet.title}</h3>
+        <button onclick="playVideo('${liveVideo.id.videoId}')">Watch Live</button>
+    `;
 }
